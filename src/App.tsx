@@ -4,6 +4,7 @@ import { Report } from "./types";
 import { getAllReports } from "./api/reports";
 import * as Realm from "realm-web";
 import ReportDetails from "./components/ReportDetails";
+import moment from "moment-timezone";
 
 const realm_app = new Realm.App({ id: "thessreport-opcka" });
 
@@ -46,38 +47,50 @@ function App() {
       <div id="pendingReports" className="reportsColumn">
         <h3>Εκκρεμείς Αναφορές</h3>
         {pendingReports &&
-          pendingReports?.map((r) => {
-            return (
-              <ReportDetails key={r.id} report={r} setReports={setReports} />
-            );
-          })}
+          pendingReports
+            .sort(
+              (reportA, reportB) =>
+                moment(reportB.date).unix() - moment(reportA.date).unix()
+            )
+            ?.map((r) => {
+              return <ReportDetails key={r.id} report={r} />;
+            })}
       </div>
       <div id="inProgressReports" className="reportsColumn">
         <h3>Αναφορές Σε Εξέλιξη</h3>
         {inProgressReports &&
-          inProgressReports?.map((r) => {
-            return (
-              <ReportDetails key={r.id} report={r} setReports={setReports} />
-            );
-          })}
+          inProgressReports
+            .sort(
+              (reportA, reportB) =>
+                moment(reportB.date).unix() - moment(reportA.date).unix()
+            )
+            ?.map((r) => {
+              return <ReportDetails key={r.id} report={r} />;
+            })}
       </div>
       <div id="resolvedReports" className="reportsColumn">
         <h3>Επιλυμένες Αναφορές</h3>
         {resolvedReports &&
-          resolvedReports?.map((r) => {
-            return (
-              <ReportDetails key={r.id} report={r} setReports={setReports} />
-            );
-          })}
+          resolvedReports
+            .sort(
+              (reportA, reportB) =>
+                moment(reportB.date).unix() - moment(reportA.date).unix()
+            )
+            ?.map((r) => {
+              return <ReportDetails key={r.id} report={r} />;
+            })}
       </div>
       <div id="rejectedReports" className="reportsColumn">
         <h3>Απορριφθείσες Αναφορές</h3>
         {rejectedReports &&
-          rejectedReports?.map((r) => {
-            return (
-              <ReportDetails key={r.id} report={r} setReports={setReports} />
-            );
-          })}
+          rejectedReports
+            .sort(
+              (reportA, reportB) =>
+                moment(reportB.date).unix() - moment(reportA.date).unix()
+            )
+            ?.map((r) => {
+              return <ReportDetails key={r.id} report={r} />;
+            })}
       </div>
     </div>
   );

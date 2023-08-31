@@ -1,12 +1,11 @@
 import React from "react";
 import { Report } from "../types";
-import { getAllReports, updateReportStatus } from "../api/reports";
+import { updateReportStatus } from "../api/reports";
 import moment from "moment-timezone";
 
 const ReportDetails: React.FC<{
   report: Report;
-  setReports: (reports: Report[] | undefined) => void;
-}> = ({ report, setReports }) => {
+}> = ({ report }) => {
   const date = moment(report.date);
   const formattedDate = date.tz("Europe/Athens").format("DD/MM/YYYY, HH:mm");
   return (
@@ -23,7 +22,11 @@ const ReportDetails: React.FC<{
       ) : (
         <p>Καταχωρήθηκε Ανώνυμα</p>
       )}
-      <p>{report.status}</p>
+      <img
+        alt="reportImage"
+        style={{ objectFit: "contain", maxHeight: 300, borderRadius: 10 }}
+        src={`http://3.71.48.208:8080/api/reports/getImage?reportId=${report.id}`}
+      />
       {report.status === "Pending" && (
         <div>
           <button
