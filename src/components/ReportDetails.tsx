@@ -11,6 +11,7 @@ const ReportDetails: React.FC<{
   return (
     <div className="report_container">
       <p>{formattedDate}</p>
+      <p style={{ fontWeight: "bold" }}>{report.category}</p>
       <p key={report.id}>
         {report.description ? report.description : "<Χωρίς περιγραφή>"}
       </p>
