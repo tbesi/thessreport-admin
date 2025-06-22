@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { Report } from "../types";
 
-const serverUrl = "http://3.71.48.208:8080";
+const serverUrl = "";
 
 export const getAllReports = async (): Promise<Report[] | undefined> => {
   try {
